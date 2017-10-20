@@ -48,9 +48,20 @@ function promptCustomer() {
       }
     ])
     .then(function(answer) {
-    	console.log(answer.id);
-    	console.log(answer.units);
+    	var id = answer.id;
+    	var units = answer.units;
+    	console.log(id);
+    	console.log(units);
+    	connection.query("SELECT stock_quantity FROM products WHERE item_id = " + id + ";",
+    		function(error, results) {
+    			if (error) throw error;
+    			console.log(results);
+		});
     });
 };
+
+// function if quantity is 0
+
+// function to update quantity
 
 
