@@ -17,8 +17,6 @@ connection.connect(function(error) {
   if (error) throw error;
   // call info function to show products
   allInfo();
-  // run the start function to prompt user
-  // start();
   // end function to stop connect and return
   connection.end();
 });
@@ -29,9 +27,30 @@ function allInfo() {
   function(error, results) {
     if (error) throw error;
     console.log(results);
+    // run the function to prompt user
+    promptCustomer();
   });
 };
 
-// start function to prompt user of purchase
+// function to prompt user of purchase
+function promptCustomer() {
+	inquirer
+    .prompt([
+      {
+        name: "id",
+        type: "input",
+        message: "What is the item ID you would like to buy?"
+      },
+      {
+        name: "units",
+        type: "input",
+        message: "How many units would you like to buy?"
+      }
+    ])
+    .then(function(answer) {
+    	console.log(answer.id);
+    	console.log(answer.units);
+    });
+};
 
 
