@@ -59,7 +59,7 @@ function promptCustomer() {
     		if (quantity === 0) {
     			noInventory();
     		} else {
-    			updateInventory(units);
+    			updateInventory(id, units);
     		};
 		});
     });
@@ -67,14 +67,14 @@ function promptCustomer() {
 
 // function if quantity is 0
 function noInventory() {
-	console.log("0 left");
+	console.log("Insufficient quantity!");
 	end();
 };
 
 // function to update quantity
-function updateInventory(units) {
+function updateInventory(id, units) {
 	console.log("update");
-	console.log(units);
+	console.log(id, units);
 	end();
 };
 // function to stop connection and return
