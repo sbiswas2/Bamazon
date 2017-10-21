@@ -64,7 +64,7 @@ function promptCustomer() {
     			noInventory();
     		} else {
     			console.log("Total Cost: $" + cost + " Dollars");
-    			updateInventory(id, units);
+    			updateInventory(id, units, quantity);
     		};
 		});
     });
@@ -77,11 +77,29 @@ function noInventory() {
 };
 
 // function to update quantity
-function updateInventory(id, units) {
+function updateInventory(id, units, quantity) {
 	console.log("update");
-	console.log(id, units);
+	console.log(id, units, quantity);
+	var updateQuantity = quantity - units;
+	console.log(updateQuantity);
+	connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [
+              {
+                stock_quantity: updateQuantity
+              },
+              {
+                item_id: id
+              }
+            ],
+            function(error) {
+              if (error) throw err;
+              console.log("Updated successfully!");
+            }
+          );
 	end();
 };
+
 // function to stop connection and return
 function end() {
   	connection.end();
