@@ -17,8 +17,7 @@ connection.connect(function(error) {
   if (error) throw error;
   // call info function to show products
   allInfo();
-  // end function to stop connect and return
-  connection.end();
+  
 });
 
 // display item_id, product_name, price
@@ -53,9 +52,10 @@ function promptCustomer() {
     	console.log(id);
     	console.log(units);
     	connection.query("SELECT stock_quantity FROM products WHERE item_id = " + id + ";",
-    		function(error, results) {
-    			if (error) throw error;
-    			console.log(results);
+    	function(error, results) {
+    		if (error) throw error;
+    		console.log(results);
+    		end();
 		});
     });
 };
@@ -64,4 +64,7 @@ function promptCustomer() {
 
 // function to update quantity
 
-
+// function to stop connection and return
+function end() {
+  	connection.end();
+};
