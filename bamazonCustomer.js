@@ -54,7 +54,7 @@ function promptCustomer() {
     	connection.query("SELECT stock_quantity FROM products WHERE item_id = " + id + ";",
     	function(error, results) {
     		if (error) throw error;
-    		var quantity = results[0].stock_quantity;
+    		var quantity = parseInt(results[0].stock_quantity);
     		console.log(quantity);
     		if (quantity === 0) {
     			noInventory();
