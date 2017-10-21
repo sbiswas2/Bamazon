@@ -59,8 +59,9 @@ function promptCustomer() {
     		var quantity = parseInt(results[0].stock_quantity);
     		var price = parseInt(results[0].price);
     		var cost = units * price;
+    		var remaining = quantity - units;
     		console.log(quantity);
-    		if (quantity === 0) {
+    		if (quantity === 0 || remaining < 0) {
     			noInventory();
     		} else {
     			console.log("Total Cost: $" + cost + " Dollars");
