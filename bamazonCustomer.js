@@ -51,8 +51,6 @@ function promptCustomer() {
     .then(function(answer) {
     	var id = answer.id;
     	var units = answer.units;
-    	console.log(id);
-    	console.log(units);
     	connection.query("SELECT * FROM products WHERE item_id = " + id + ";",
     	function(error, results) {
     		if (error) throw error;
@@ -60,7 +58,6 @@ function promptCustomer() {
     		var price = parseInt(results[0].price);
     		var cost = units * price;
     		var remaining = quantity - units;
-    		console.log(quantity);
     		if (quantity === 0 || remaining < 0) {
     			noInventory();
     		} else {
@@ -79,10 +76,7 @@ function noInventory() {
 
 // function to update quantity
 function updateInventory(id, units, quantity) {
-	console.log("update");
-	console.log(id, units, quantity);
 	var updateQuantity = quantity - units;
-	console.log(updateQuantity);
 	connection.query(
             "UPDATE products SET ? WHERE ?",
             [
@@ -95,7 +89,6 @@ function updateInventory(id, units, quantity) {
             ],
             function(error) {
               if (error) throw err;
-              console.log("Updated successfully!");
             }
           );
 	end();
