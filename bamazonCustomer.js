@@ -54,16 +54,29 @@ function promptCustomer() {
     	connection.query("SELECT stock_quantity FROM products WHERE item_id = " + id + ";",
     	function(error, results) {
     		if (error) throw error;
-    		console.log(results);
-    		end();
+    		var quantity = results[0].stock_quantity;
+    		console.log(quantity);
+    		if (quantity === 0) {
+    			noInventory();
+    		} else {
+    			updateInventory(units);
+    		};
 		});
     });
 };
 
 // function if quantity is 0
+function noInventory() {
+	console.log("0 left");
+	end();
+};
 
 // function to update quantity
-
+function updateInventory(units) {
+	console.log("update");
+	console.log(units);
+	end();
+};
 // function to stop connection and return
 function end() {
   	connection.end();
