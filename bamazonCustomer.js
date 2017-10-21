@@ -22,10 +22,12 @@ connection.connect(function(error) {
 
 // display item_id, product_name, price
 function allInfo() {
-  connection.query("SELECT item_id, product_name, price FROM products",
+  connection.query("SELECT * FROM products",
   function(error, results) {
     if (error) throw error;
-    console.log(results);
+    for (var i = 0; i < results.length; i++) {
+    	console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | $" + results[i].price);
+    }
     // run the function to prompt user
     promptCustomer();
   });
@@ -51,14 +53,17 @@ function promptCustomer() {
     	var units = answer.units;
     	console.log(id);
     	console.log(units);
-    	connection.query("SELECT stock_quantity FROM products WHERE item_id = " + id + ";",
+    	connection.query("SELECT * FROM products WHERE item_id = " + id + ";",
     	function(error, results) {
     		if (error) throw error;
     		var quantity = parseInt(results[0].stock_quantity);
+    		var price = parseInt(results[0].price);
+    		var cost = units * price;
     		console.log(quantity);
     		if (quantity === 0) {
     			noInventory();
     		} else {
+    			console.log("Total Cost: $" + cost + " Dollars");
     			updateInventory(id, units);
     		};
 		});
