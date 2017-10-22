@@ -60,28 +60,32 @@ function promptManager() {
 
 // list all products
 function products() {
-    console.log("view products");
     connection.query("SELECT * FROM products",
       function(error, results) {
         if (error) throw error;
         for (var i = 0; i < results.length; i++) {
           console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | $" + results[i].price + " | " + results[i].stock_quantity + " units left");
         }
-      end();
+      end(); // end
     });
 };
 
 
 // show items where inventory is less than 5 units
 function lowInventory() {
-    console.log("low inventory");
     connection.query("SELECT * FROM products WHERE stock_quantity < 5",
       function(error, results) {
         if (error) throw error;
-        for (var i = 0; i < results.length; i++) {
-          console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | " + results[i].stock_quantity + " units left");
+        // first check if there are items, if no items have low inventory then display this message
+        if (results.length === 0) {
+          console.log("All items have sufficient inventory");
+        } else {
+          // if there are items, then display low inventory
+          for (var i = 0; i < results.length; i++) {
+            console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | " + results[i].stock_quantity + " units left");
+          }
         }
-      end();
+      end(); // end
     });
 };
 
@@ -122,9 +126,7 @@ function addInventory() {
           if (error) throw error;
           // calculations
           var quantity = parseInt(results[0].stock_quantity);
-          console.log(quantity);
           var newQuantity = quantity + units;
-          console.log(newQuantity);
           updateInventory(id, newQuantity); // re-direct to update inventory
         });
     });
@@ -133,11 +135,11 @@ function addInventory() {
 
 // update mysql database
 function updateInventory(id, newQuantity) {
-    console.log("updated inventory");
     connection.query("UPDATE products SET stock_quantity = " + newQuantity +" WHERE item_id = " + id + ";",
       function(error, results) {
         if (error) throw error;
-      end();
+      console.log("Updated Inventory");
+      end(); // end
     });
 };
 
@@ -191,8 +193,8 @@ function newProduct() {
         },
         function(err) {
           if (err) throw err;
-          console.log("Your database was updated successfully!");
-          end();
+          console.log("Your database was updated successfully");
+          end(); // end
         }
       );
     });
