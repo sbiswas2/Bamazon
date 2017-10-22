@@ -85,7 +85,33 @@ function lowInventory() {
 
 function addInventory() {
     console.log("add inventory");
-    end();
+    inquirer
+    .prompt([
+    {
+      name: "id",
+      type: "input",
+      message: "Select Item ID:"
+    },
+    {
+      name: "units",
+      type: "input",
+      message: "Add Units:"
+    }
+    ])
+    .then(function(answer) {
+      var id = parseInt(answer.id);
+      var units = parseInt(answer.units);
+      connection.query("SELECT * FROM products WHERE item_id = " + id + ";",
+        function(error, results) {
+          if (error) throw error;
+          // calculations
+          var quantity = parseInt(results[0].stock_quantity);
+          console.log(quantity);
+          var newQuantity = quantity + units;
+          console.log(newQuantity);
+          end();
+        });
+    });
 };
 
 

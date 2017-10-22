@@ -52,8 +52,8 @@ function promptCustomer() {
       }
     ])
     .then(function(answer) {
-    	var id = answer.id;
-    	var units = answer.units;
+    	var id = parseInt(answer.id);
+    	var units = parseInt(answer.units);
     	connection.query("SELECT * FROM products WHERE item_id = " + id + ";",
     	function(error, results) {
     		if (error) throw error;
