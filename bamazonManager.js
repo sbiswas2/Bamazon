@@ -59,7 +59,14 @@ function promptManager() {
 
 function products() {
     console.log("view products");
-    end();
+    connection.query("SELECT * FROM products",
+      function(error, results) {
+        if (error) throw error;
+        for (var i = 0; i < results.length; i++) {
+          console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | $" + results[i].price + " | " + results[i].stock_quantity + " units left");
+        }
+      end();
+    });
 };
 
 
