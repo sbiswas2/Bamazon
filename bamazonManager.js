@@ -90,12 +90,24 @@ function addInventory() {
     {
       name: "id",
       type: "input",
-      message: "Select Item ID:"
+      message: "Select Item ID:",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
     },
     {
       name: "units",
       type: "input",
-      message: "Add Units:"
+      message: "Add Units:",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
     }
     ])
     .then(function(answer) {
@@ -109,8 +121,18 @@ function addInventory() {
           console.log(quantity);
           var newQuantity = quantity + units;
           console.log(newQuantity);
-          end();
+          updateInventory(id, newQuantity); // re-direct to update inventory
         });
+    });
+};
+
+
+function updateInventory(id, newQuantity) {
+    console.log("updated inventory");
+    connection.query("UPDATE products SET stock_quantity = " + newQuantity +" WHERE item_id = " + id + ";",
+      function(error, results) {
+        if (error) throw error;
+      end();
     });
 };
 

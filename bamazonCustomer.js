@@ -43,12 +43,24 @@ function promptCustomer() {
       {
         name: "id",
         type: "input",
-        message: "What is the item ID you would like to buy?"
+        message: "What is the item ID you would like to buy?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
       },
       {
         name: "units",
         type: "input",
-        message: "How many units would you like to buy?"
+        message: "How many units would you like to buy?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
       }
     ])
     .then(function(answer) {
