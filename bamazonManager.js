@@ -144,8 +144,58 @@ function updateInventory(id, newQuantity) {
 
 // add new product
 function newProduct() {
-    console.log("new products");
-    end();
+    console.log("add product");
+    inquirer
+    .prompt([
+    {
+      name: "name",
+      type: "input",
+      message: "Product Name:",
+    },
+    {
+      name: "department",
+      type: "input",
+      message: "Department Name:",
+    },
+    {
+      name: "price",
+      type: "input",
+      message: "Price:",
+      validate: function(value) {
+        if (isNaN(value) === false) {
+          return true;
+        }
+        return false;
+      }
+    },
+    {
+      name: "units",
+      type: "input",
+      message: "Stock Quantity:",
+      validate: function(value) {
+        if (isNaN(value) === false) {
+          return true;
+        }
+        return false;
+      }
+    }
+    ])
+    .then(function(answer) {
+      connection.query(
+        "INSERT INTO products SET ?",
+        {
+          product_name: answer.name,
+          department_name: answer.department,
+          price: parseInt(answer.price),
+          stock_quantity: parseInt(answer.units)
+        },
+        function(err) {
+          if (err) throw err;
+          console.log("Your database was updated successfully!");
+          end();
+        }
+      );
+    });
 };
 
 
