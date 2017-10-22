@@ -22,6 +22,7 @@ connection.connect(function(error) {
 });
 
 
+// give manager choices
 function promptManager() {
     inquirer
     .prompt({
@@ -57,6 +58,7 @@ function promptManager() {
 };
 
 
+// list all products
 function products() {
     console.log("view products");
     connection.query("SELECT * FROM products",
@@ -70,6 +72,7 @@ function products() {
 };
 
 
+// show items where inventory is less than 5 units
 function lowInventory() {
     console.log("low inventory");
     connection.query("SELECT * FROM products WHERE stock_quantity < 5",
@@ -83,8 +86,9 @@ function lowInventory() {
 };
 
 
+// ask how much inventory to add
 function addInventory() {
-    console.log("add inventory");
+    console.log("Add More:");
     inquirer
     .prompt([
     {
@@ -127,6 +131,7 @@ function addInventory() {
 };
 
 
+// update mysql database
 function updateInventory(id, newQuantity) {
     console.log("updated inventory");
     connection.query("UPDATE products SET stock_quantity = " + newQuantity +" WHERE item_id = " + id + ";",
@@ -137,6 +142,7 @@ function updateInventory(id, newQuantity) {
 };
 
 
+// add new product
 function newProduct() {
     console.log("new products");
     end();
