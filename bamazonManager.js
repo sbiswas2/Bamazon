@@ -72,7 +72,14 @@ function products() {
 
 function lowInventory() {
     console.log("low inventory");
-    end();
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5",
+      function(error, results) {
+        if (error) throw error;
+        for (var i = 0; i < results.length; i++) {
+          console.log("ID " + results[i].item_id + " | " + results[i].product_name + " | " + results[i].stock_quantity + " units left");
+        }
+      end();
+    });
 };
 
 
