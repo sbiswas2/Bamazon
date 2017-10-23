@@ -1,2 +1,4 @@
 # Bamazon
-node simulation of Amazon using MySQL
+
+## Project: A simulation of an e-commerce store like Amazon using the node application.
+
