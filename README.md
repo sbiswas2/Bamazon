@@ -20,18 +20,26 @@ In the second scenario, we are going to look at the application from a manager's
 
 ![Challenge 2 Prompt](images/challenge2_prompt.png)
 
-View Products for Sale
+1.  View Products for Sale
+
+	* The node application displays all of the products stored in the MySQL database.  This will include the Item ID, Product Name, Price, and Stock Quantity.
 
 ![Challenge 2 View](images/challenge2_view.png)
 
-View Low Inventory
+2.  View Low Inventory
+
+	* The node application will only display items where there are less than 5 units remaining in stock.
 
 ![Challenge 2 Low](images/challenge2_low.png)
 
-Add Inventory
+3.  Add Inventory
+
+	* The manager will be prompted to select the product by the Item ID and must enter how many units to add to the inventory.  The application then adds the number and updates the MySQL with the new quantity.
 
 ![Challenge 2 Add Inventory](images/challenge2_add_inv.png)
 
-Add New Product
+4.  Add New Product
+
+	* The node application will create a new row in the MySQL database and enter a new product.  The manager is prompted to enter all relevant information.  Then the database gets updated from the inputs.
 
 ![Challenge 2 Add New Product](images/challenge2_add_prod.png)
